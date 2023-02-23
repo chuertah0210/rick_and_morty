@@ -1,0 +1,30 @@
+
+.cardcontainer {
+    
+    max-width: 300px;
+    margin: auto;
+    margin-right: 2rem;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  .cardcontainer  h2 {
+    color: chartreuse;
+    font-size: 18px;
+    margin: auto;
+    position: relative;
+    top: -41px;
+    left: -92px;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(2px);
+    width: fit-content;
+    text-shadow: 2px 2px #0D0D0D;
+  }
+  .cardcontainer  h3 {
+    color: chartreuse;
+    font-size: 18px;
+    margin: auto;
+    background-color: black;
+    position: relative;
+    top: -29px;
+  }

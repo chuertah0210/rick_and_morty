@@ -28,17 +28,7 @@ function logout() {
      navigate('/home');
 }
 
-const onSearch=(character)=> {
-    fetch(`https://rickandmortyapi.com/api/character/${character}`)
-       .then((response) => response.json())
-       .then((data) => {
-          if (data.name) {
-             setCharacters((oldChars) => [...oldChars, data]);
-          } else {
-             window.alert('No hay personajes con ese ID');
-          }
-       });
- }
+
 
   const onClose =(id)=>{
     setCharacters(
@@ -54,7 +44,7 @@ const onSearch=(character)=> {
     <div className='App' style={{ padding: '25px' }}>
       
       { location.pathname!=='/' &&   
-      <Nav onSearch={onSearch} logout={logout}/>   
+      <Nav  logout={logout}/>   
       }
       <Routes>
         <Route path='' element ={<Form login={login}/>}/>

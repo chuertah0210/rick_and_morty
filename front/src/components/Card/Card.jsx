@@ -19,7 +19,7 @@
 
 // export default Card;
 import s from './Card.module.css'
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 const CharacterCard = ({ id, name, gender, image }) => {
     return(
