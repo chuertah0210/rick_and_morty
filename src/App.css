@@ -1,0 +1,8 @@
+.App {
+   text-align: center;
+/* background-image: url('./components/img/r.jpg'); */
+background-position: 50%;
+background-repeat: no-repeat;
+text-align: center;
+background-size: cover;
+}
