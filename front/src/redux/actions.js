@@ -14,7 +14,8 @@ export const getAllCharacters = () => { // SIEMPRE que queramos solicitar info a
 
 export const getCharacterDetail = (id) => {
   return function(dispatch){
-    axios(`https://rickandmortyapi.com/api/character/${id}`)
+    //axios(`https://rickandmortyapi.com/api/character/${id}`)
+    axios(`http://localhost:3001/rickandmorty/onsearch/${id}`)
     .then(response => response.data)
     .then(data => {
         return dispatch({ type: GET_CHARACTER_DETAIL, payload: data })

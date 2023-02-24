@@ -19,16 +19,16 @@
 
 // export default Card;
 import s from './Card.module.css'
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const CharacterCard = ({ id, name, gender, image }) => {
     return(
         <div className={s.cardcontainer}  >
             <img src={image} alt={name} style={{ borderRadius: '9999999999rem' }} />
 
-            {/* <Link to={`/detail/${id}`} > */}
+            <Link to={`/detail/${id}`} >
                 <h2>{name}</h2>
-            {/* </Link> */}
+            </Link>
 
             <h3>Gender: {gender}</h3>
         </div>
