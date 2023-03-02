@@ -1,4 +1,4 @@
-import { GET_ALL_CHARACTERS, GET_CHARACTER_DETAIL, CLEAN_CHARACTER_DETAIL } from "./action-types";
+import { GET_ALL_CHARACTERS, GET_CHARACTER_DETAIL, CLEAN_CHARACTER_DETAIL,GET_BACK,SEARCH_CHARACTER_DETAIL,CLOSE } from "./action-types";
 import axios from 'axios';
 
 export const getAllCharacters = () => { // SIEMPRE que queramos solicitar info a un server, es decir que vamos a usar fetch o axios, la action retorna otra función e interviene el middleware
@@ -22,7 +22,24 @@ export const getCharacterDetail = (id) => {
     })
   }  
 } 
+export const searchCharacterDetail = (id) => {
+    return function(dispatch){
+      //axios(`https://rickandmortyapi.com/api/character/${id}`)
+      axios(`http://localhost:3001/rickandmorty/onsearch/${id}`)
+      .then(response => response.data)
+      .then(data => {
+          return dispatch({ type: SEARCH_CHARACTER_DETAIL, payload: data })
+      })
+    }  
+  } 
 
+export const getBack = () => {
+    return { type: GET_BACK }
+}
+
+export const closeCard = (id) => {
+    return { type: CLOSE ,payload: id}
+}
 
 export const cleanCharacterDetail = () => {
     return { type: CLEAN_CHARACTER_DETAIL }

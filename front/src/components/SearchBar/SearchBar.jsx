@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import s from './SearchBar.module.css'
-//import {useNavigate } from 'react-router-dom'
 import {  useDispatch } from "react-redux";
 import * as actions from "../../redux/actions";
 
 function SearchBar() {
+
    const [charachter,setCharacter]=useState('')
-   //const navigate = useNavigate();
+
    const dispatch = useDispatch();
+   
    const handlerChange=(event)=>{
       setCharacter(event.target.value)
    };
@@ -15,9 +16,14 @@ function SearchBar() {
    const onClick = () => {
       console.log(charachter)
       //navigate('/detail/'+charachter)  
-      charachter.length>1 || typeof charachter !== 'number'
-      ?dispatch(actions.getCharacterDetail(charachter))
-      : alert ('debe escribir un id numerico de personaje')
+      if (charachter.length>1 ){
+         dispatch(actions.searchCharacterDetail(charachter))
+         setCharacter('')
+      }
+      else{
+         alert ('debe escribir un id numerico de personaje')
+      }
+
    }
 
    return (

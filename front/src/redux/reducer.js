@@ -1,8 +1,9 @@
-import { GET_ALL_CHARACTERS, GET_CHARACTER_DETAIL, CLEAN_CHARACTER_DETAIL } from "./action-types";
+import { GET_ALL_CHARACTERS, GET_CHARACTER_DETAIL, CLEAN_CHARACTER_DETAIL, GET_BACK,SEARCH_CHARACTER_DETAIL,CLOSE } from "./action-types";
 
 const initialState = {
     characters: [],
-    characterDetail: {}
+    characterDetail: {},
+    noReload: false
 }
 
 
@@ -17,8 +18,17 @@ const reducer = (state = initialState, action) => {
         case GET_CHARACTER_DETAIL:
             return {
                 ...state,
-                characters: [...state.characters, action.payload]
-               // characterDetail: action.payload
+                //characters: [...state.characters, action.payload],
+                characterDetail: action.payload
+            }
+            case SEARCH_CHARACTER_DETAIL:
+                const usuarioEncontrado = state.characters.find(charcter => charcter.id === action.payload.id);
+                if (!usuarioEncontrado){
+                return {
+                    ...state,
+                    characters: [...state.characters, action.payload],
+                    //characterDetail: action.payload
+                }
             }
 
         case CLEAN_CHARACTER_DETAIL: 
@@ -26,9 +36,28 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 characterDetail: {}
             }
+            case GET_BACK: 
+            return {
+                ...state,
+                noReload: true
+            }
+
+            case CLOSE: 
+            const id = action.payload;
+            const index = state.characters.findIndex(producto => producto.id === id);
+            //console.log(id,index,state.characters[0].id)
+            if (index >= 0) {
+                const newArray = [...state.characters];
+                newArray.splice(index, 1);
+        
+                return { ...state, characters: newArray };
+              }
+              return { ...state };
 
         default: 
-            return {...state}
+            return {
+                ...state
+            }
     }
 }
 

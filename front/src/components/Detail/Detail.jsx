@@ -44,79 +44,89 @@
 
 // export default Detail;
 
-// // import { useParams } from "react-router-dom";
-// // // import { useEffect } from "react";
-// // import { useSelector, useDispatch } from "react-redux";
-// // // import { getCharacterDetail, cleanCharacterDetail } from "../../redux/actions";
-// // import * as actions from "../../redux/actions";
-// // import React from "react";
-
-// // const CharacterDetail = () => {
-// //     const { id } = useParams();
-// //     const dispatch = useDispatch();
-// //     const { image, name, species, origin, gender, status } = useSelector(state => state.characterDetail);
-
-// //     React.useEffect(() => {
-// //         dispatch(actions.getCharacterDetail(id))
-
-// //         return () => dispatch(actions.cleanCharacterDetail())
-// //     }, [])
-
-// //     return(
-// //         <div>
-// //             <img src={image} alt={name} />
-// //             <h1>{name}</h1>
-// //             <p>Specie: {species}</p>
-// //             <p>Gender: {gender}</p>
-// //             <p>Status: {status}</p>
-// //             <p>Origin: {origin?.name}</p>
-// //         </div>
-// //     )
-// // }
-
-// // export default CharacterDetail;
-
-
-import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Link } from 'react-router-dom'
-import s from './Detail.module.css'
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from "../../redux/actions";
+import React from "react";
+ import s from './Detail.module.css'
+  import { Link } from 'react-router-dom'
 
-const CardDetails = () => {
-  let { id } = useParams();
+const CharacterDetail = () => {
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    const { image, name, species, origin, gender, status } = useSelector(state => state.characterDetail);
 
-  let [fetchedData, updateFetchedData] = useState([]);
-  let { name, location, origin, gender, image, status, species } = fetchedData;
+    React.useEffect(() => {
+        dispatch(actions.getCharacterDetail(id))
+        dispatch(actions.getBack())
+        return () => dispatch(actions.cleanCharacterDetail())
+    }, [])
 
-  let api = `http://localhost:3001/detail/${id}`;
+    return(
+      <div >
+            <div className={s.cardcontainer}>
+             <h1 >{name}</h1>
+      
+             <img src={image} alt="" />
+             <div >
+                 <span >Gender :{gender} </span><br/>
+                 
+                 <span >Origin: {origin?.name}</span><br/>
+                 <span >Species: {species}</span><br/><br/>
+      
+                  <button>
+                      <Link to='/home'>back</Link>
+                  </button>
+              </div>
+           </div>
+                  
+         </div>
+    )
+}
 
-  useEffect(() => {
-    (async function () {
-      let data = await fetch(api).then((res) => res.json());
-      updateFetchedData(data);
-    })();
-  }, [api]);
+export default CharacterDetail;
 
-  return (
-    <div >
-      <div className={s.cardcontainer}>
-        <h1 >{name}</h1>
 
-        <img src={image} alt="" />
-        <div >
-            <span >Gender :{gender} </span><br/>
-            <span >Location: {location?.name}</span><br/>
-            <span >Origin: {origin?.name}</span><br/>
-            <span >Species: {species}</span><br/><br/>
+// import React, { useState, useEffect } from "react";
+// import { useParams } from "react-router-dom";
+// import { Link } from 'react-router-dom'
+// import s from './Detail.module.css'
 
-            <button>
-                 <Link to='/home'>back</Link>
-             </button>
-        </div>
-      </div>
+// const CardDetails = () => {
+//   let { id } = useParams();
+
+//   let [fetchedData, updateFetchedData] = useState([]);
+//   let { name, location, origin, gender, image, status, species } = fetchedData;
+
+//   let api = `http://localhost:3001/detail/${id}`;
+
+//   useEffect(() => {
+//     (async function () {
+//       let data = await fetch(api).then((res) => res.json());
+//       updateFetchedData(data);
+//     })();
+//   }, [api]);
+
+//   return (
+//     <div >
+//       <div className={s.cardcontainer}>
+//         <h1 >{name}</h1>
+
+//         <img src={image} alt="" />
+//         <div >
+//             <span >Gender :{gender} </span><br/>
+//             <span >Location: {location?.name}</span><br/>
+//             <span >Origin: {origin?.name}</span><br/>
+//             <span >Species: {species}</span><br/><br/>
+
+//             <button>
+//                  <Link to='/home'>back</Link>
+//              </button>
+//         </div>
+//       </div>
             
-    </div>
-  );
-};
+//     </div>
+//   );
+// };
 
-export default CardDetails;
+// export default CardDetails;

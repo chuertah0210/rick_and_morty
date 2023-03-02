@@ -36,7 +36,9 @@ class Characters extends React.Component{
     }
 
     componentDidMount(){
+        if (this.props.noReload===false){
         this.props.getAllCharacters();
+    }
     }
 
     render(){
@@ -60,7 +62,8 @@ class Characters extends React.Component{
 
 const mapStateToProps = (state) => {
     return {
-        characters: state.characters
+        characters: state.characters,
+        noReload: state.noReload
     }
 }
 
